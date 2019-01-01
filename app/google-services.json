@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "690551689792-9t2ba0d486hsu633smc3dqkmo4tudj5q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.applligent.chatapplligent",
+            "certificate_hash": "145f5cd21fb27919dfb7524fbf4ed7c8b920fe05"
+          }
+        },
+        {
           "client_id": "690551689792-ji36lnmms47430lhtrp6ff722usef2fo.apps.googleusercontent.com",
           "client_type": 3
         }
