@@ -16,10 +16,16 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         binding=DataBindingUtil.setContentView(this,R.layout.activity_start);
-        binding.registerButton.setOnClickListener(new View.OnClickListener() {
+        binding.signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(StartActivity.this, RegisterActivity.class));
+            }
+        });
+        binding.login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StartActivity.this, LoginActvity.class));
             }
         });
     }

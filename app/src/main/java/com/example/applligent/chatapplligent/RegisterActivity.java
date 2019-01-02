@@ -38,8 +38,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
-        mToolbar= new Toolbar(this);
+       mToolbar=(Toolbar)findViewById(R.id.appbar);
+       setSupportActionBar(mToolbar);
+       getSupportActionBar().setTitle("Register yourself");
         progressBar= new ProgressDialog(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -54,15 +57,13 @@ public class RegisterActivity extends AppCompatActivity {
                 if(!TextUtils.isEmpty(etNAme)|| !TextUtils.isEmpty(etEmail) || !TextUtils.isEmpty(etPassword)){
                     progressBar.setTitle("Registration progress");
                     progressBar.setMessage("please wait");
-                    progressBar.show();
                     progressBar.setCanceledOnTouchOutside(false);
+                    progressBar.show();
                     registerUser(etNAme, etEmail, etPassword);
-                }
-
             }
+                }
         });
-
-    }
+        }
 
     private void registerUser(final String name, String email, final String password) {
         Task<AuthResult> authResultTask = mAuth.createUserWithEmailAndPassword(email, password)
@@ -70,25 +71,30 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                        if (task.isSuccessful()) {
-
+                           progressBar.dismiss();
                            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                            String userId= currentUser.getUid();
 
                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                           DatabaseReference myRef = database.getReference().child(userId);
+                           DatabaseReference myRef = database.getReference().child("users").child(userId);
 
                            HashMap<String ,String> userDAta = new HashMap<>();
                            userDAta.put("name",name);
                            userDAta.put("status","hey their");
                            userDAta.put("image","default");
+                           myRef.setValue(userDAta).addOnCompleteListener(new OnCompleteListener<Void>() {
+                               @Override
+                               public void onComplete(@NonNull Task<Void> task) {
+                                   if(task.isSuccessful()){
+                                       progressBar.dismiss();
+                                       startActivity(new Intent(RegisterActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                       finish();
+                                   }
+                               }
+                           });
 
-
-                           myRef.setValue(userDAta);
-
-                          /*  progressBar.dismiss();
                             // Sign in success, update UI with the signed-in user's information
-                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                          */
+
                         } else {
                             progressBar.hide();
                             // If sign in fails, display a message to the user.

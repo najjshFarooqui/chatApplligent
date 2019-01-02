@@ -5,4 +5,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="spinnerList">
+        <item>Select Name</item>
+        <item>Aaqib</item>
+        <item>Zubair</item>
+        <item>Rizwan</item>
+        <item>Aamir</item>
+    </string-array>
 </resources>

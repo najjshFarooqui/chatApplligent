@@ -13,32 +13,25 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch(position){
             case 0:
-                RequesFragment requesFragment = new RequesFragment();
-                return  requesFragment;
-            case 1:
                 ChatsFragment chatsFragment = new ChatsFragment();
                 return  chatsFragment;
-            case 2:
+            case 1:
                 Friends friends = new Friends();
                 return  friends;
              default: return  null;
-
-
         }
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
     public CharSequence getPageTitle(int position){
         switch (position){
             case 0:
-                return"REQUETS";
+                return"chats";
             case 1:
-                return "CHATS";
-            case 3:
-                return "FRIENDS";
+                return "friends";
                 default:
                     return null;
         }
